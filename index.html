@@ -6,14 +6,7 @@
 <title>Dr. Alejandro Silva · Odontología de Precisión</title>
 <meta name="description" content="Odontología estética y funcional de alto nivel. Tecnología de vanguardia, resultados que duran toda la vida.">
 
-<!-- Fuentes: carga 100% asíncrona via JS. Cero bloqueo de render. -->
-<style>
-  /* Fallback inmediato mientras cargan las fuentes web */
-  :root {
-    --ff-head: Georgia, 'Times New Roman', serif;
-    --ff-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  }
-</style>
+<!-- Zero external font requests. System font stack. -->
 
 <style>
   /* ===== RESET & BASE ===== */
@@ -30,8 +23,8 @@
     --teal:      #2D6A6A;
     --teal-lt:   #3D8F8F;
     --white:     #FFFFFF;
-    --ff-head:   Georgia, 'Times New Roman', serif; /* Reemplazado por JS tras carga */
-    --ff-body:   system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --ff-head:   'Didot', 'Bodoni MT', 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --ff-body:   ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
     --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in:   cubic-bezier(0.7, 0, 0.84, 0);
   }
@@ -405,14 +398,14 @@
   .doctor-tag-float {
     position: absolute; top: -20px; right: -20px;
     background: var(--gold);
-    color: var(--white);
+    color: #1A1A1A; /* #1A1A1A sobre #C4A46B = 7.35:1 WCAG AAA */
     padding: 1rem 1.5rem;
     border-radius: 16px;
     text-align: center;
     box-shadow: 0 16px 40px rgba(196,164,107,0.4);
   }
-  .doctor-tag-float strong { display: block; font-size: 1.5rem; font-family: var(--ff-head); }
-  .doctor-tag-float span { font-size: 0.72rem; letter-spacing: 0.1em; opacity: 0.85; }
+  .doctor-tag-float strong { display: block; font-size: 1.5rem; font-family: var(--ff-head); color: #1A1A1A; }
+  .doctor-tag-float span { font-size: 0.72rem; letter-spacing: 0.1em; color: #2E2E2E; /* sin opacity — color sólido calculado */ }
   .doctor-content h2 { color: var(--white); font-size: clamp(2rem, 3vw, 2.8rem); margin-bottom: 1.5rem; }
   .doctor-content h2 em { color: var(--gold); }
   .doctor-content p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 1.5rem; }
@@ -923,7 +916,7 @@
     <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06)">
       <a href="https://cirujanadigital.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.6rem;text-decoration:none;opacity:0.5;transition:opacity 0.2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4 1 2 3 2 5.5C2 7.5 3 9 5 9.5L5.5 13H8.5L9 9.5C11 9 12 7.5 12 5.5C12 3 10 1 7 1Z" fill="#00a7a9"/></svg>
-        <span style="font-size:0.72rem;letter-spacing:0.08em;color:#A8A8A8;font-family:'DM Sans',sans-serif">Desarrollado con precisión quirúrgica por <strong style="color:#FFFFFF;font-weight:600">Yulia Monti · Cirujana Digital</strong></span>
+        <span style="font-size:0.72rem;letter-spacing:0.08em;color:#999999;font-family:'DM Sans',system-ui,sans-serif">Desarrollado con precisión quirúrgica por <strong style="color:#FFFFFF;font-weight:600">Yulia Monti · Cirujana Digital</strong></span>
       </a>
     </div>
     </div>
@@ -940,37 +933,16 @@
   // Fade-up intersection observer
   const fadeEls = document.querySelectorAll('.fade-up');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const siblings = [...entry.target.parentElement.querySelectorAll('.fade-up')];
         const idx = siblings.indexOf(entry.target);
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, Math.min(idx * 80, 320));
+        setTimeout(() => entry.target.classList.add('visible'), Math.min(idx * 80, 320));
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
   fadeEls.forEach(el => observer.observe(el));
-
-  // Carga asíncrona de Google Fonts — no bloquea render inicial
-  // Se ejecuta después de que la página ya pintó (requestIdleCallback o setTimeout fallback)
-  function loadFonts() {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap';
-    link.onload = function() {
-      // Actualizar variables CSS con las fuentes web una vez cargadas
-      document.documentElement.style.setProperty('--ff-head', "'Playfair Display', Georgia, serif");
-      document.documentElement.style.setProperty('--ff-body', "'DM Sans', system-ui, sans-serif");
-    };
-    document.head.appendChild(link);
-  }
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(loadFonts);
-  } else {
-    setTimeout(loadFonts, 200);
-  }
 </script>
 </body>
 </html>
