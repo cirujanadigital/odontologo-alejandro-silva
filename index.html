@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Alejandro Silva · Odontología de Precisión</title>
+<meta name="description" content="Odontología estética y funcional de alto nivel. Tecnología de vanguardia, resultados que duran toda la vida.">
+
+<!-- Preconnect para performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ivory:     #FAF8F4;
+    --cream:     #F0EBE1;
+    --bone:      #E2D9CC;
+    --charcoal:  #1A1A1A;
+    --slate:     #3D3D3D;
+    --muted:     #7A7A7A;
+    --gold:      #C4A46B;
+    --gold-lt:   #D9C49A;
+    --teal:      #2D6A6A;
+    --teal-lt:   #3D8F8F;
+    --white:     #FFFFFF;
+    --ff-head:   'Playfair Display', Georgia, serif;
+    --ff-body:   'DM Sans', system-ui, sans-serif;
+    --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in:   cubic-bezier(0.7, 0, 0.84, 0);
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: var(--ff-body);
+    background: var(--ivory);
+    color: var(--charcoal);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+  /* ===== UTILIDADES ===== */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .tag {
+    display: inline-block;
+    font-family: var(--ff-body);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-lt);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  h1,h2,h3,h4 { font-family: var(--ff-head); line-height: 1.15; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 var(--bone);
+  }
+  .nav-logo {
+    font-family: var(--ff-head);
+    font-size: 1.1rem;
+    color: var(--charcoal);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .nav-logo-icon {
+    width: 32px; height: 32px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 400; letter-spacing: 0.05em;
+    color: var(--slate); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--charcoal); color: var(--ivory) !important;
+    padding: 0.6rem 1.4rem; border-radius: 100px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--white) !important; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding-top: 5rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 70% 50%, rgba(196,164,107,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { padding: 4rem 0 4rem 4rem; }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .hero-eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+  .hero-eyebrow span {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500;
+  }
+  .hero h1 {
+    font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+  .hero-desc {
+    font-size: 1.05rem; color: var(--muted);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--charcoal); color: var(--ivory);
+    padding: 0.9rem 2rem; border-radius: 100px;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    color: var(--slate); font-size: 0.9rem; font-weight: 400;
+    text-decoration: none; letter-spacing: 0.02em;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--bone);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* Hero Visual */
+  .hero-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    height: 100vh;
+  }
+  .hero-bg-shape {
+    position: absolute;
+    right: -80px; top: 50%; transform: translateY(-50%);
+    width: 600px; height: 700px;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--bone) 100%);
+    border-radius: 300px 60px 60px 300px;
+    z-index: 0;
+  }
+  .hero-card {
+    position: relative; z-index: 1;
+    background: var(--white);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 32px 80px rgba(26,26,26,0.12), 0 8px 24px rgba(196,164,107,0.1);
+    max-width: 360px;
+    margin-right: 2rem;
+  }
+  /* Tooth SVG Illustration */
+  .tooth-illustration {
+    width: 100%; display: flex; justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; margin-top: 1.5rem;
+  }
+  .stat-item { text-align: center; padding: 1rem; background: var(--ivory); border-radius: 12px; }
+  .stat-number { font-family: var(--ff-head); font-size: 1.8rem; color: var(--charcoal); display: block; }
+  .stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+
+  /* Floating badge */
+  .hero-badge {
+    position: absolute; bottom: 30%; left: -20px; z-index: 2;
+    background: var(--teal);
+    color: var(--white);
+    padding: 1rem 1.25rem;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(45,106,106,0.3);
+    font-size: 0.8rem;
+    min-width: 160px;
+  }
+  .hero-badge strong { display: block; font-size: 1.1rem; font-family: var(--ff-head); }
+
+  /* ===== MARQUEE ===== */
+  .marquee-section {
+    background: var(--charcoal);
+    padding: 1.2rem 0;
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex; gap: 3rem;
+    animation: marquee 28s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); flex-shrink: 0;
+  }
+  .marquee-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ===== SERVICIOS ===== */
+  .services { padding: 7rem 0; }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .section-header h2 { font-size: clamp(2rem, 3.5vw, 3rem); margin-bottom: 1rem; }
+  .section-header p { font-size: 1rem; color: var(--muted); max-width: 520px; margin: 0 auto; font-weight: 300; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--white);
+    border: 1px solid var(--bone);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--teal));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s var(--ease-out);
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(26,26,26,0.1); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 48px; height: 48px;
+    background: var(--cream);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .service-card h3 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+  .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+  .service-card.featured {
+    background: var(--charcoal);
+    border-color: var(--charcoal);
+    grid-row: span 1;
+  }
+  .service-card.featured h3, .service-card.featured p { color: var(--white); }
+  .service-card.featured p { color: rgba(255,255,255,0.6); }
+  .service-card.featured .service-icon { background: rgba(255,255,255,0.1); }
+
+  /* ===== PROCESO ===== */
+  .process {
+    padding: 7rem 0;
+    background: var(--cream);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .process-steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex; gap: 1.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--bone);
+    cursor: default;
+    transition: padding-left 0.3s;
+  }
+  .step:last-child { border-bottom: none; }
+  .step:hover { padding-left: 0.5rem; }
+  .step-num {
+    font-family: var(--ff-head); font-size: 2rem; color: var(--bone);
+    min-width: 48px; line-height: 1; padding-top: 0.1rem;
+    transition: color 0.3s;
+  }
+  .step:hover .step-num { color: var(--gold); }
+  .step-content h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+  .step-content p { font-size: 0.88rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+  /* Process Visual */
+  .process-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .process-circle {
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--white), var(--ivory));
+    box-shadow: 0 32px 80px rgba(26,26,26,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 3rem;
+  }
+  .process-circle-tag { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; margin-bottom: 0.75rem; }
+  .process-circle-num { font-family: var(--ff-head); font-size: 5rem; color: var(--charcoal); line-height: 1; }
+  .process-circle-label { font-size: 0.9rem; color: var(--muted); margin-top: 0.5rem; font-weight: 300; }
+  .process-orbit {
+    position: absolute; inset: -40px;
+    border: 1px dashed var(--bone);
+    border-radius: 50%;
+    animation: rotate 30s linear infinite;
+  }
+  .orbit-dot {
+    position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* ===== TESTIMONIOS ===== */
+  .testimonials { padding: 7rem 0; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .testimonial-card {
+    background: var(--white);
+    border: 1px solid var(--bone);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+  }
+  .testimonial-card.highlight {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+  .testimonial-card.highlight * { color: rgba(255,255,255,0.9) !important; }
+  .testimonial-card.highlight .stars { color: var(--gold-lt) !important; }
+  .stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.1em; display: block; margin-bottom: 1rem; }
+  .testimonial-text { font-size: 0.92rem; color: var(--slate); line-height: 1.75; margin-bottom: 1.5rem; font-weight: 300; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--ff-head); color: var(--gold); font-size: 1rem;
+  }
+  .author-name { font-size: 0.88rem; font-weight: 500; color: var(--charcoal); }
+  .author-detail { font-size: 0.75rem; color: var(--muted); }
+
+  /* ===== DR. SECTION ===== */
+  .doctor { padding: 7rem 0; background: var(--charcoal); }
+  .doctor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .doctor-portrait {
+    position: relative;
+    display: flex; justify-content: center;
+  }
+  .portrait-bg {
+    width: 380px; height: 460px;
+    background: linear-gradient(135deg, #2A2A2A, #1A1A1A);
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .portrait-bg::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+    background: linear-gradient(to top, rgba(196,164,107,0.15), transparent);
+  }
+  .doctor-tag-float {
+    position: absolute; top: -20px; right: -20px;
+    background: var(--gold);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(196,164,107,0.4);
+  }
+  .doctor-tag-float strong { display: block; font-size: 1.5rem; font-family: var(--ff-head); }
+  .doctor-tag-float span { font-size: 0.72rem; letter-spacing: 0.1em; opacity: 0.85; }
+  .doctor-content h2 { color: var(--white); font-size: clamp(2rem, 3vw, 2.8rem); margin-bottom: 1.5rem; }
+  .doctor-content h2 em { color: var(--gold); }
+  .doctor-content p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 1.5rem; }
+  .credentials {
+    display: flex; flex-direction: column; gap: 0.75rem;
+    margin: 2rem 0;
+  }
+  .cred-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .cred-icon { color: var(--gold); font-size: 1rem; line-height: 1.4; }
+  .cred-text { font-size: 0.88rem; color: rgba(255,255,255,0.7); font-weight: 300; }
+
+  /* ===== CTA FINAL ===== */
+  .cta-section {
+    padding: 7rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(196,164,107,0.07) 0%, transparent 70%);
+  }
+  .cta-section h2 { font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 1.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+  .cta-section h2 em { color: var(--gold); }
+  .cta-section p { font-size: 1rem; color: var(--muted); margin-bottom: 2.5rem; font-weight: 300; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    border: 1.5px solid var(--charcoal); color: var(--charcoal);
+    padding: 0.9rem 2rem; border-radius: 100px;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+  }
+  .btn-outline:hover { background: var(--charcoal); color: var(--white); transform: translateY(-2px); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--charcoal);
+    padding: 3rem 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-brand { font-family: var(--ff-head); color: var(--white); font-size: 1rem; }
+  .footer-brand span { color: var(--gold); }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+  /* ===== ANIMATIONS ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; text-align: center; padding: 6rem 0 3rem; }
+    .hero-content { padding: 2rem; }
+    .hero-desc { margin: 0 auto 2rem; }
+    .hero-actions { justify-content: center; }
+    .hero-visual { height: 400px; }
+    .hero-bg-shape { display: none; }
+    .hero-card { margin: 0 auto; }
+    .hero-badge { display: none; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .process-visual { display: none; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .doctor-grid { grid-template-columns: 1fr; }
+    .doctor-portrait { display: none; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M9 2C6.5 2 4.5 4 4.5 6.5C4.5 8.5 5.5 10 7 11L7.5 16H10.5L11 11C12.5 10 13.5 8.5 13.5 6.5C13.5 4 11.5 2 9 2Z" fill="white"/>
+      </svg>
+    </div>
+    Dr. Silva
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#doctor">El Doctor</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#contacto" class="nav-cta">Reservar turno</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content fade-up">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Odontología de Precisión · Buenos Aires</span>
+    </div>
+    <h1>
+      Sonrisas diseñadas
+      <em>con exactitud.</em>
+    </h1>
+    <p class="hero-desc">
+      Combinamos tecnología de diagnóstico avanzado con una estética cuidada al milímetro. Cada tratamiento comienza con datos, no con suposiciones.
+    </p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-primary">
+        Reservar consulta
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#proceso" class="btn-secondary">
+        Ver cómo trabajamos
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-bg-shape"></div>
+    <div class="hero-card fade-up">
+      <div class="tooth-illustration">
+        <svg width="100" height="120" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="toothGrad" x1="0" y1="0" x2="100" y2="120" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FAF8F4"/>
+              <stop offset="100%" stop-color="#E2D9CC"/>
+            </linearGradient>
+            <linearGradient id="goldGrad" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#C4A46B"/>
+              <stop offset="100%" stop-color="#D9C49A"/>
+            </linearGradient>
+          </defs>
+          <!-- Cuerpo del diente -->
+          <path d="M20 10 C20 10, 15 10, 12 20 C8 32, 10 48, 14 58 L18 88 C18 88, 20 100, 28 100 L34 100 C38 100, 40 95, 40 90 L40 75 C40 75, 42 68, 50 68 C58 68, 60 75, 60 75 L60 90 C60 95, 62 100, 66 100 L72 100 C80 100, 82 88, 82 88 L86 58 C90 48, 92 32, 88 20 C85 10, 80 10, 80 10 C80 10, 72 8, 65 12 C60 15, 55 18, 50 18 C45 18, 40 15, 35 12 C28 8, 20 10, 20 10 Z" fill="url(#toothGrad)" stroke="#C4A46B" stroke-width="1.5"/>
+          <!-- Brillo -->
+          <ellipse cx="36" cy="34" rx="6" ry="10" fill="rgba(255,255,255,0.6)" transform="rotate(-15 36 34)"/>
+          <!-- Línea raíz -->
+          <line x1="32" y1="68" x2="32" y2="100" stroke="url(#goldGrad)" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="68" y1="68" x2="68" y2="100" stroke="url(#goldGrad)" stroke-width="1" stroke-dasharray="3,3"/>
+        </svg>
+      </div>
+      <p style="text-align:center;font-size:0.8rem;color:var(--muted);font-weight:300;margin-bottom:1rem">Estado del esmalte dental</p>
+      <!-- Mini progress bars -->
+      <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1rem">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem"><span>Resistencia</span><span>92%</span></div>
+          <div style="height:4px;background:var(--cream);border-radius:2px"><div style="height:100%;width:92%;background:var(--teal);border-radius:2px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem"><span>Alineación</span><span>87%</span></div>
+          <div style="height:4px;background:var(--cream);border-radius:2px"><div style="height:100%;width:87%;background:var(--gold);border-radius:2px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem"><span>Vitalidad</span><span>96%</span></div>
+          <div style="height:4px;background:var(--cream);border-radius:2px"><div style="height:100%;width:96%;background:#2D6A6A;border-radius:2px"></div></div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">14+</span>
+          <span class="stat-label">años de experiencia</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">98%</span>
+          <span class="stat-label">satisfacción</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <strong>2.800+</strong>
+      <span>pacientes tratados</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <!-- Items duplicados para loop infinito sin JS -->
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Ortodoncia Invisible</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Implantes Dentales</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Carillas de Porcelana</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Blanqueamiento Láser</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Endodoncia Digital</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Periodoncia Avanzada</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Cirugía Guiada</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Ortodoncia Invisible</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Implantes Dentales</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Carillas de Porcelana</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Blanqueamiento Láser</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Endodoncia Digital</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Periodoncia Avanzada</span></div>
+    <div class="marquee-item"><div class="marquee-dot"></div><span>Cirugía Guiada</span></div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="services">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="tag">Servicios</div>
+      <h2>Intervención precisa.<br>Resultado visible.</h2>
+      <p>Cada tratamiento está respaldado por diagnóstico digital, planificación 3D y materiales de grado médico internacional.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#C4A46B" stroke-width="1.5"/><path d="M7 11L10 14L15 8" stroke="#C4A46B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Diagnóstico Digital 3D</h3>
+        <p>Tomografía de haz cónico (CBCT) para evaluación volumétrica completa antes de cualquier procedimiento.</p>
+      </div>
+
+      <div class="service-card featured fade-up">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="16" rx="4" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/><path d="M7 11H15M11 7V15" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Implantes Premium</h3>
+        <p>Sistema Nobel Biocare con protocolo de carga inmediata. Osseointegración verificada por radiología digital.</p>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 18L9 13M18 4L13 9M9 13L13 9" stroke="#2D6A6A" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="16" r="2" stroke="#C4A46B" stroke-width="1.5"/><circle cx="16" cy="6" r="2" stroke="#C4A46B" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Ortodoncia Invisible</h3>
+        <p>Aligners personalizados con software de predicción de movimiento dental. Plan de 12 meses con revisiones mensuales.</p>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3C7.5 3 5 5.5 5 8.5C5 11 6.5 13 9 14L9.5 19H12.5L13 14C15.5 13 17 11 17 8.5C17 5.5 14.5 3 11 3Z" stroke="#C4A46B" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <h3>Carillas de Porcelana</h3>
+        <p>E.max feldespática de 0.3mm de grosor. Diseño de sonrisa asistido por software con mock-up previo en boca.</p>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L14 8H20L15 12L17 18L11 14L5 18L7 12L2 8H8L11 2Z" stroke="#C4A46B" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <h3>Blanqueamiento Clínico</h3>
+        <p>Activación LED de nueva generación. Hasta 8 tonos de mejora en una sesión de 90 minutos sin sensibilidad.</p>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 11H19M11 3V19" stroke="#C4A46B" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="11" r="8" stroke="#C4A46B" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Endodoncia Rotativa</h3>
+        <p>Sistema ProTaper Gold con localizador apical electrónico. Tasa de éxito superior al 95% documentada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="process">
+  <div class="container">
+    <div class="process-grid">
+      <div>
+        <div class="tag">Metodología</div>
+        <h2 style="font-size:clamp(2rem,3vw,2.8rem);margin-bottom:1rem">Proceso clínico<br>sin margen de error.</h2>
+        <p style="color:var(--muted);font-weight:300;margin-bottom:2.5rem">Cada visita tiene un objetivo medible. Nada improvisado.</p>
+        <div class="process-steps">
+          <div class="step fade-up">
+            <span class="step-num">01</span>
+            <div class="step-content">
+              <h3>Diagnóstico de precisión</h3>
+              <p>Radiografía digital, scanner intraoral y fotografía estandarizada. En 45 minutos conocemos el estado real de su cavidad oral.</p>
+            </div>
+          </div>
+          <div class="step fade-up">
+            <span class="step-num">02</span>
+            <div class="step-content">
+              <h3>Plan de tratamiento documentado</h3>
+              <p>Protocolo escrito con etapas, tiempos, materiales y resultados esperados. Usted aprueba antes de comenzar.</p>
+            </div>
+          </div>
+          <div class="step fade-up">
+            <span class="step-num">03</span>
+            <div class="step-content">
+              <h3>Ejecución bajo protocolo ISO</h3>
+              <p>Esterilización clase B, materiales con certificación CE y FDA. Cada maniobra documentada en historia clínica digital.</p>
+            </div>
+          </div>
+          <div class="step fade-up">
+            <span class="step-num">04</span>
+            <div class="step-content">
+              <h3>Control y garantía de resultado</h3>
+              <p>Seguimiento fotográfico y radiológico a los 3, 6 y 12 meses. Garantía de implantes de por vida.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-visual">
+        <div class="process-orbit">
+          <div class="orbit-dot"></div>
+        </div>
+        <div class="process-circle">
+          <span class="process-circle-tag">Tasa de éxito</span>
+          <span class="process-circle-num">97%</span>
+          <span class="process-circle-label">en implantes<br>documentado a 5 años</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="tag">Testimonios</div>
+      <h2>Lo que dicen quienes<br>ya tomaron la decisión.</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <span class="stars">★★★★★</span>
+        <p class="testimonial-text">"Después de años postergándolo, me hice los implantes. El proceso fue exactamente como me lo describieron: sin sorpresas, sin dolor, con seguimiento real."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">M</div>
+          <div>
+            <div class="author-name">Marcela V.</div>
+            <div class="author-detail">Implantes bilaterales · 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card highlight fade-up">
+        <span class="stars">★★★★★</span>
+        <p class="testimonial-text">"Las carillas de porcelana superaron mis expectativas. El diseño digital previo fue clave: supe exactamente cómo iba a quedar antes de firmar nada."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:rgba(255,255,255,0.15);color:white">R</div>
+          <div>
+            <div class="author-name">Rodrigo A.</div>
+            <div class="author-detail">Diseño de sonrisa · 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <span class="stars">★★★★★</span>
+        <p class="testimonial-text">"Fui por una consulta y me dieron un informe clínico completo. Nunca había vivido una experiencia odontológica tan estructurada y profesional."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">C</div>
+          <div>
+            <div class="author-name">Carolina E.</div>
+            <div class="author-detail">Ortodoncia invisible · 2023</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTOR -->
+<section id="doctor" class="doctor">
+  <div class="container">
+    <div class="doctor-grid">
+      <div class="doctor-portrait">
+        <div class="portrait-bg">
+          <!-- Ilustración SVG del doctor -->
+          <svg width="200" height="280" viewBox="0 0 200 280" fill="none">
+            <!-- Cuerpo/guardapolvo -->
+            <rect x="30" y="130" width="140" height="150" rx="20" fill="#2A2A2A"/>
+            <rect x="55" y="130" width="90" height="150" rx="10" fill="#333"/>
+            <!-- Cabeza -->
+            <ellipse cx="100" cy="100" rx="45" ry="50" fill="#D4A574"/>
+            <!-- Pelo -->
+            <path d="M55 80 C55 55, 145 55, 145 80 L145 70 C145 45, 55 45, 55 70 Z" fill="#2A1A0A"/>
+            <!-- Ojos -->
+            <ellipse cx="85" cy="95" rx="5" ry="6" fill="#1A1A1A"/>
+            <ellipse cx="115" cy="95" rx="5" ry="6" fill="#1A1A1A"/>
+            <circle cx="87" cy="93" r="1.5" fill="white"/>
+            <circle cx="117" cy="93" r="1.5" fill="white"/>
+            <!-- Sonrisa -->
+            <path d="M88 115 Q100 125, 112 115" stroke="#1A1A1A" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Cuello -->
+            <rect x="88" y="145" width="24" height="20" fill="#D4A574"/>
+            <!-- Corbata -->
+            <path d="M96 155 L100 180 L104 155 L100 150 Z" fill="#C4A46B"/>
+            <!-- Cruz médica en guardapolvo -->
+            <rect x="60" y="160" width="20" height="6" rx="3" fill="#2D6A6A" opacity="0.8"/>
+            <rect x="67" y="153" width="6" height="20" rx="3" fill="#2D6A6A" opacity="0.8"/>
+            <!-- Bolsillo con instrumentos -->
+            <rect x="125" y="155" width="30" height="35" rx="4" fill="#222"/>
+            <rect x="130" y="150" width="2" height="20" rx="1" fill="#C4A46B"/>
+            <rect x="135" y="150" width="2" height="18" rx="1" fill="#AAA"/>
+            <rect x="140" y="150" width="2" height="16" rx="1" fill="#C4A46B"/>
+          </svg>
+        </div>
+        <div class="doctor-tag-float">
+          <strong>MN 45.892</strong>
+          <span>Matrícula Nacional</span>
+        </div>
+      </div>
+
+      <div class="doctor-content fade-up">
+        <div class="tag" style="border-color:rgba(196,164,107,0.4);color:var(--gold)">El especialista</div>
+        <h2>Dr. Alejandro Silva<br><em>Implantología &amp; Estética</em></h2>
+        <p>Odontólogo egresado de la Universidad de Buenos Aires con especialización en Implantología Oral y Periodoncia. Formación de posgrado en la Universidad de Bologna, Italia.</p>
+        <p>14 años de práctica clínica. Más de 2.800 implantes colocados. Miembro activo de la Sociedad Española de Implantes (SEI) y la ITI.</p>
+        <div class="credentials">
+          <div class="cred-item">
+            <span class="cred-icon">◆</span>
+            <span class="cred-text">Especialista en Implantología Oral · UBA · 2012</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-icon">◆</span>
+            <span class="cred-text">Fellowship ITI · International Team for Implantology · 2015</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-icon">◆</span>
+            <span class="cred-text">Posgrado en Estética Dental · Università di Bologna · 2018</span>
+          </div>
+          <div class="cred-item">
+            <span class="cred-icon">◆</span>
+            <span class="cred-text">Instructor certificado Nobel Biocare para Latinoamérica</span>
+          </div>
+        </div>
+        <a href="#contacto" class="btn-primary" style="margin-top:0.5rem">
+          Agendar consulta con el Dr. Silva
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contacto" class="cta-section">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="fade-up">
+      <div class="tag">Primera consulta</div>
+      <h2>La decisión correcta<br>empieza con <em>información real.</em></h2>
+      <p>Primera consulta diagnóstica completa: scanner intraoral, radiografía y plan de tratamiento personalizado.</p>
+      <div class="cta-actions">
+        <a href="tel:+5491123456789" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 2H6L7.5 5.5L6 6.5C6.8 8.1 7.9 9.2 9.5 10L10.5 8.5L14 10V13C14 13.6 13.6 14 13 14C7 14 2 9 2 3C2 2.4 2.4 2 3 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          Llamar al consultorio
+        </a>
+        <a href="https://wa.me/5491123456789" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5 8.5C5.5 10.5 10.5 11 11 8.5C11.5 6 8.5 5 7 6.5L5.5 8L6.5 10L8.5 10.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none"/></svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <!-- Info cards -->
+      <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:3rem;flex-wrap:wrap">
+        <div style="background:var(--white);border:1px solid var(--bone);border-radius:16px;padding:1.25rem 2rem;text-align:center">
+          <div style="font-size:1.3rem;margin-bottom:0.25rem">🕐</div>
+          <div style="font-size:0.82rem;font-weight:500;color:var(--charcoal)">Lunes a Viernes</div>
+          <div style="font-size:0.78rem;color:var(--muted)">9:00 – 19:00 hs</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--bone);border-radius:16px;padding:1.25rem 2rem;text-align:center">
+          <div style="font-size:1.3rem;margin-bottom:0.25rem">📍</div>
+          <div style="font-size:0.82rem;font-weight:500;color:var(--charcoal)">Palermo, CABA</div>
+          <div style="font-size:0.78rem;color:var(--muted)">Av. Santa Fe 3450, Piso 4</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--bone);border-radius:16px;padding:1.25rem 2rem;text-align:center">
+          <div style="font-size:1.3rem;margin-bottom:0.25rem">🏥</div>
+          <div style="font-size:0.82rem;font-weight:500;color:var(--charcoal)">Obras Sociales</div>
+          <div style="font-size:0.78rem;color:var(--muted)">OSDE · Swiss Medical · Galeno</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">Dr. Alejandro <span>Silva</span> · Odontología de Precisión</div>
+      <div class="footer-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#doctor">El Doctor</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="footer-copy">© 2025 · MN 45.892 · CABA, Argentina</div>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06)">
+      <a href="https://cirujanadigital.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.6rem;text-decoration:none;opacity:0.5;transition:opacity 0.2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4 1 2 3 2 5.5C2 7.5 3 9 5 9.5L5.5 13H8.5L9 9.5C11 9 12 7.5 12 5.5C12 3 10 1 7 1Z" fill="#00a7a9"/></svg>
+        <span style="font-size:0.72rem;letter-spacing:0.08em;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif">Desarrollado con precisión quirúrgica por <strong style="color:#00a7a9">Yulia Monti · Cirujana Digital</strong></span>
+      </a>
+    </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Fade-up intersection observer
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger delay basado en posición en DOM
+        const siblings = [...entry.target.parentElement.querySelectorAll('.fade-up')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, Math.min(idx * 80, 320));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
