@@ -6,11 +6,14 @@
 <title>Dr. Alejandro Silva · Odontología de Precisión</title>
 <meta name="description" content="Odontología estética y funcional de alto nivel. Tecnología de vanguardia, resultados que duran toda la vida.">
 
-<!-- Fuentes: preload no bloqueante con font-display:swap -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"></noscript>
+<!-- Fuentes: carga 100% asíncrona via JS. Cero bloqueo de render. -->
+<style>
+  /* Fallback inmediato mientras cargan las fuentes web */
+  :root {
+    --ff-head: Georgia, 'Times New Roman', serif;
+    --ff-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+</style>
 
 <style>
   /* ===== RESET & BASE ===== */
@@ -27,8 +30,8 @@
     --teal:      #2D6A6A;
     --teal-lt:   #3D8F8F;
     --white:     #FFFFFF;
-    --ff-head:   'Playfair Display', Georgia, serif;
-    --ff-body:   'DM Sans', system-ui, sans-serif;
+    --ff-head:   Georgia, 'Times New Roman', serif; /* Reemplazado por JS tras carga */
+    --ff-body:   system-ui, -apple-system, 'Segoe UI', sans-serif;
     --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in:   cubic-bezier(0.7, 0, 0.84, 0);
   }
@@ -920,7 +923,7 @@
     <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06)">
       <a href="https://cirujanadigital.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.6rem;text-decoration:none;opacity:0.5;transition:opacity 0.2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4 1 2 3 2 5.5C2 7.5 3 9 5 9.5L5.5 13H8.5L9 9.5C11 9 12 7.5 12 5.5C12 3 10 1 7 1Z" fill="#00a7a9"/></svg>
-        <span style="font-size:0.72rem;letter-spacing:0.08em;color:rgba(255,255,255,0.75);font-family:'DM Sans',sans-serif">Desarrollado con precisión quirúrgica por <strong style="color:#00c4c6">Yulia Monti · Cirujana Digital</strong></span>
+        <span style="font-size:0.72rem;letter-spacing:0.08em;color:#A8A8A8;font-family:'DM Sans',sans-serif">Desarrollado con precisión quirúrgica por <strong style="color:#FFFFFF;font-weight:600">Yulia Monti · Cirujana Digital</strong></span>
       </a>
     </div>
     </div>
@@ -939,7 +942,6 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        // Stagger delay basado en posición en DOM
         const siblings = [...entry.target.parentElement.querySelectorAll('.fade-up')];
         const idx = siblings.indexOf(entry.target);
         setTimeout(() => {
@@ -949,8 +951,26 @@
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
-
   fadeEls.forEach(el => observer.observe(el));
+
+  // Carga asíncrona de Google Fonts — no bloquea render inicial
+  // Se ejecuta después de que la página ya pintó (requestIdleCallback o setTimeout fallback)
+  function loadFonts() {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap';
+    link.onload = function() {
+      // Actualizar variables CSS con las fuentes web una vez cargadas
+      document.documentElement.style.setProperty('--ff-head', "'Playfair Display', Georgia, serif");
+      document.documentElement.style.setProperty('--ff-body', "'DM Sans', system-ui, sans-serif");
+    };
+    document.head.appendChild(link);
+  }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadFonts);
+  } else {
+    setTimeout(loadFonts, 200);
+  }
 </script>
 </body>
 </html>
